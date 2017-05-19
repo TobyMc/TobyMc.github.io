@@ -3,3 +3,9 @@ body {
     color: firebrick;
     font-family: sans-serif;
 }
+
+.box {
+    border: 1px solid #444444;
+    padding: 10px;
+    margin: 10px;
+}

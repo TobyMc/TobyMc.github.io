@@ -1,12 +1,78 @@
-<html>
-<head>
-  <link rel="stylesheet" href="./style/sheet.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Toby's website</title>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toby's website</title>
+    <link rel="stylesheet" href="./style/sheet.css">
+    <script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.131/build/three.module.js"
+        }
+			}
+		</script>
+  </head>
+
 <body>
-  <h1 class="title"> Hello world!</h1>
+  <label class="hamburger-menu">
+    <input type="checkbox">
+  </label>
+  <aside class="sidebar">
+    <nav>
+      <div> <a href="index.html" class="links"> HOME</a></div>
+      <div> <a href="blog.html" class="links"> BLOG</a></div>
+    </nav>
+  </aside>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xeeeeee); // Set a light gray background color
+    const camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(w, h);
+    document.body.appendChild(renderer.domElement);
+
+    new OrbitControls(camera, renderer.domElement);
+
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshStandardMaterial({
+    color: 0xff0000 // Set to red for visibility
+    });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    const hemiLight = new THREE.HemisphereLight();
+    scene.add(hemiLight);
+
+    function animate() {
+    requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.001;
+    cube.rotation.y += 0.002;
+    renderer.render(scene, camera);
+    }
+
+    animate();
+
+    function handleWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    window.addEventListener('resize', handleWindowResize, false);
+</script>
 </body>
+
+
 </html>

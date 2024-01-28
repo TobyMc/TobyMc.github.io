@@ -17,15 +17,14 @@
   </head>
 
 <body>
-  <div id="content-container"></div>
   <!-- Menu overlay section -->
-    <section class="overlay-menu">
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="blog.html">BLOG</a></li>
-      </ul>
-      <button id="closeMenu">Close Menu</button>
-    </section>
+  <section class="overlay-menu">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+    </ul>
+    <button id="closeMenu">Close Menu</button>
+  </section>
 
 
   <!-- "You are here" label -->
@@ -89,22 +88,7 @@
     }
 
     window.addEventListener('resize', handleWindowResize, false);
-
-    // Add the following JavaScript for scrolling effects
-    const overlay = document.getElementById('overlay');
-            const overlayMenu = document.querySelector('.overlay-menu');
-
-            window.addEventListener('scroll', () => {
-                const scrollPosition = window.scrollY;
-
-                // Update overlay opacity based on scroll position
-                overlay.style.opacity = Math.min(scrollPosition / 300, 1);
-
-                // Toggle menu visibility based on scroll position
-                overlayMenu.style.display = scrollPosition > 1 ? 'block' : 'none';
-            });
 </script>
-</div>
 </body>
 
 

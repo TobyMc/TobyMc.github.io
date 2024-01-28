@@ -9,23 +9,20 @@ const renderer = new THREE.WebGLRenderer({antialias: True});
 renderer.setSize(w, h);
 document.body.appendChild(renderer.domElement);
 
-new OrbitControls(camera, renderer.domElement)
+new OrbitControls(camera, renderer.domElement);
 
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshStandardMaterial({
-    color: black
-})
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
-
-consthesiLight = new THREE.HemisphereLight()
+const geometry = new THREE.SphereGeometry( 15, 32, 16 ); 
+const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
+const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
+const hemiLight = new THREE.HemisphereLight();
 scene.add(hemiLight);
-function animate() {
-    requestAnimationFrame(animate)
 
-    cube.rotation.x += 0.001
-    cube.rotation.y += 0.002
-    renderer.render(scene, camera)
+function animate() {
+requestAnimationFrame(animate);
+
+sphere.rotation.x += 0.001;
+sphere.rotation.y += 0.002;
+renderer.render(scene, camera);
 }
 
 animate();

@@ -20,11 +20,11 @@
   <!-- Menu overlay section -->
   <section class="overlay-menu">
     <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="blog.html">BLOG</a></li>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="blog.html">BLOG</a></li>
     </ul>
-    <button id="closeMenu">Close Menu</button>
-  </section>
+</section>
+
 
 
   <!-- "You are here" label -->
@@ -49,8 +49,9 @@
     const geometry = new THREE.SphereGeometry( 15, 32, 16 );
     const texture = new THREE.TextureLoader().load( 'https://i.imgur.com/kFoWvzw.jpg' );
     const material = new THREE.MeshPhongMaterial( { map: texture } );           
-    const sphere = new THREE.Mesh( geometry, material );
-    scene.add( sphere );
+    var sphere = new THREE.Mesh( geometry, material );
+    sphere.cursor = 'pointer';
+    scene.add(sphere);
 
     
     const hemiLight = new THREE.HemisphereLight();
@@ -72,7 +73,6 @@
     }
 
 
-
     function animate() {
     requestAnimationFrame(animate);
     sphere.rotation.y += 0.002;
@@ -88,7 +88,31 @@
     }
 
     window.addEventListener('resize', handleWindowResize, false);
-</script>
+
+    function closeOverlay() {
+            document.querySelector('.overlay-menu').style.display = 'none';
+        }
+
+    window.addEventListener('click', function(event) {
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+
+            // Calculate mouse position in normalized device coordinates
+            // (-1 to +1) for both components
+            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+            // Update the picking ray with the camera and mouse position
+            raycaster.setFromCamera(mouse, camera);
+
+            // Calculate objects intersecting the picking ray
+            const intersects = raycaster.intersectObject(sphere);
+
+            if (intersects.length > 0) {
+                document.querySelector('.overlay-menu').style.display = 'block';
+            }
+        }, false);
+    </script>
 </body>
 
 

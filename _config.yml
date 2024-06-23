@@ -28,7 +28,7 @@ production_url : https://tobymc.github.io
 #
 
 # Build settings
-theme: minima
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
